@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Presentation Ninja</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Yihui Xie" />
+    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link rel="stylesheet" href="extra.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, title-slide
+
+
+
+&lt;style&gt;
+.remark-slide-number {
+  color: #ffff;
+  margin: 0px 0px 0px 0px;
+  padding: 20px;
+  font-family: "Droid Serif","Palatino Linotype","Book Antiqua",Palatino,"Microsoft YaHei","Songti SC",serif;
+}
+
+h1, h2, h3 {
+  font-family: "Yanone Kaffeesatz", Tahoma, Geneva, sans-serif;
+  font-weight: normal;
+}
+
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+
+
+&lt;/style&gt;
+
+
+
+&lt;img src = 'img/cas.png'&gt;
+
+&lt;h1 class="title"&gt; 2017 CAS Spring Meeting &lt;/h1&gt;
+&lt;h2 class="title"&gt; &lt;span class="red"&gt; Introduction &lt;/span&gt; to &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;: Fitting Models and Saving Results&lt;/h2&gt;
+
+&lt;h3 class="title"&gt; Rajesh Sahasrabuddhe&lt;/h3&gt;
+
+&lt;h3 class="title"&gt; Alexandra Taggart&lt;/h3&gt;
+
+&lt;img src = 'img/logo.png' height="25px"&gt;
+
+---
+layout: true
+
+
+&lt;footer&gt;
+&lt;img src = 'img/logo.png' height="15px" style = "position: absolute; right: 0px; bottom: 30px; left: 30px; text-align: center;"&gt;
+&lt;/footer&gt;
+
+---
+
+# Basics
+
+&lt;ol&gt;
+  &lt;li&gt;A mathematical model is a description of a system using mathematical concepts and language.&lt;/li&gt;
+  &lt;li&gt;Models are R objects like any others&lt;/li&gt;
+  &lt;li&gt;Common Actuarial Models (not a complete list)&lt;/li&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Linear Models (Relationships)&lt;/li&gt;
+    &lt;li&gt;Distributions&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/ol&gt;
+
+
+---
+
+# The Linear Model (OLS)
+
+
+```r
+lm1 &lt;- lm(mpg ~ wt, data = mtcars)
+```
+
+&lt;ol&gt;
+  &lt;li&gt; Summary (via) &lt;code&gt;summary.lm&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt; Predict (via) &lt;code&gt;summary.lm&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;lm.influence&lt;/code&gt; and &lt;code&gt;confint&lt;/code&gt;&lt;/li&gt;
+&lt;ol&gt;
+
+---
+
+# The Linear Model (OLS)
+
+
+```r
+summary(lm1)
+```
+
+```
+## 
+## Call:
+## lm(formula = mpg ~ wt, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.046 on 30 degrees of freedom
+## Multiple R-squared:  0.7528,	Adjusted R-squared:  0.7446 
+## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10
+```
+
+
+---
+
+# The Linear Model (OLS)
+
+
+```r
+plot(lm1, which = 1:2)
+```
+
+![](cas_spring_2017_models_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;![](cas_spring_2017_models_files/figure-html/unnamed-chunk-3-2.png)&lt;!-- --&gt;
+---
+
+# The Linear Model (OLS)
+
+
+```r
+plot(lm1, which = c(3,5))
+```
+
+![](cas_spring_2017_models_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;![](cas_spring_2017_models_files/figure-html/unnamed-chunk-4-2.png)&lt;!-- --&gt;
+---
+
+# The Linear Model (OLS)
+
+
+```r
+confint(lm1)
+```
+
+```
+##                 2.5 %    97.5 %
+## (Intercept) 33.450500 41.119753
+## wt          -6.486308 -4.202635
+```
+
+```r
+predict(object = lm1, newdata = data.frame(wt = 3))
+```
+
+```
+##        1 
+## 21.25171
+```
+
+---
+
+# The Linear Model (OLS)
+
+
+```r
+new_mpg &lt;- predict(object = lm1, newdata = data.frame(wt = 3))
+plot(x = mtcars$wt, y = mtcars$mpg)
+points(x = 3, y = new_mpg, col = "blue", pch = 19)
+abline(v = 3, lty = 'dotted', col = 'blue')
+abline(h = new_mpg, lty = 'dotted', col = 'blue')
+```
+
+![](cas_spring_2017_models_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+---
+# Exercise 1
+
+
+Fit a linear model regressing distance on speed in the &lt;code&gt;datasets::cars&lt;/code&gt; data.
+&lt;ol&gt;
+&lt;li&gt;Provide the coefficient of disatance&lt;/li&gt;
+&lt;li&gt;Plot the model (in orange) against the data (in blue).&lt;/li&gt;
+&lt;li&gt;Extract the residual of the 10th data point&lt;/li&gt;
+&lt;/ol&gt;
+
+---
+# Solution 1
+
+
+```r
+plot(cars$speed, cars$dist, col = 'blue')
+lm2 &lt;- lm(dist ~ speed, data = cars)
+abline(lm2, col= "orange")
+```
+
+![](cas_spring_2017_models_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+---
+# Solution 1
+
+
+```r
+coefficients(lm2)
+```
+
+```
+## (Intercept)       speed 
+##  -17.579095    3.932409
+```
+
+```r
+confint(lm2)
+```
+
+```
+##                  2.5 %    97.5 %
+## (Intercept) -31.167850 -3.990340
+## speed         3.096964  4.767853
+```
+
+```r
+#str(lm2)
+lm2$residuals[10]
+```
+
+```
+##        10 
+## -8.677401
+```
+
+---
+# Solution 1
+
+
+```r
+plot(cars$speed, cars$dist, col = 'blue')
+abline(lm2, col = 'orange')
+points(cars$speed[10], cars$dist[10], col = 'red', pch = 19)
+new_y &lt;- predict(lm2, newdata = data.frame(speed = cars$speed[10]))
+points(cars$speed[10], new_y, col = 'red', pch = 19)
+text(x = cars$speed[10] + .5, y = mean(new_y, cars$dist[10]) - 2, col = ' red',
+  labels = paste('Resid =', round(cars$dist[10] - new_y, 3)), adj = c(0,0.5))
+```
+
+![](cas_spring_2017_models_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+---
+
+# Exercise 2
+
+The &lt;code&gt;mixtools&lt;/code&gt; packages includes functions to fit finite mixture distributions.
+&lt;ol&gt;
+  &lt;li&gt; Review the faithful dataset via &lt;code&gt;?faithful&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt; Use the normalmixEM function to fit a two component mixture of normals to the &lt;code&gt;waiting&lt;/code&gt; variable in the &lt;code&gt;faithful&lt;/code&gt; data using the following assumptions:&lt;/li&gt;
+  &lt;ol&gt;
+    &lt;li&gt; Using a starting seed of &lt;code&gt;12345&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt; Using a 50/50 weighting for the starting mix rates &lt;/li&gt;
+    &lt;li&gt; With the components certered 55 and 80&lt;/li&gt;
+    &lt;li&gt; With each of the components have a standard deviations of 5&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;li&gt; Report the parameters of the model &lt;/li&gt;
+  &lt;li&gt; Create a plot that compares the data and models&lt;/li&gt;
+
+---
+
+# Solution 2
+
+
+
+
+```r
+# install.packages(mixtools)
+library(mixtools)
+```
+
+```
+## mixtools package, version 1.1.0, Released 2017-03-10
+## This package is based upon work supported by the National Science Foundation under Grant No. SES-0518772.
+```
+
+```r
+set.seed(12345)
+wait1 &lt;- normalmixEM(faithful$waiting, lambda = .5, mu = c(55, 80), sigma = 5)
+```
+
+```
+## number of iterations= 9
+```
+
+```r
+summary(wait1)
+```
+
+```
+## summary of normalmixEM object:
+##          comp 1   comp 2
+## lambda  0.36085  0.63915
+## mu     54.61364 80.09031
+## sigma   5.86909  5.86909
+## loglik at estimate:  -1034.002
+```
+---
+
+# Solution 2
+
+
+```r
+# install.packages(mixtools)
+plot(wait1, density = TRUE, cex.axis = 1.4, cex.lab = 1.4, cex.main = 1.8, 
+  main2 = "Time between Old Faithful eruptions", xlab2 = "Minutes", which = 2)
+```
+
+![](cas_spring_2017_models_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

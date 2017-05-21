@@ -1,0 +1,311 @@
+---
+title: "Presentation Ninja"
+subtitle: "<br/>with xaringan"
+author: "Yihui Xie"
+date: "2016/12/12"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    yolo: FALSE
+    seal: FALSE
+    css: ["default", "extra.css"]
+    self_contained: FALSE
+    nature:
+      highlightStyle: github
+      highlightLines: TRUE
+      countIncrementalSlides: FALSE
+      ratio: '16:9'
+---
+class: center, middle, title-slide
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+<style>
+.remark-slide-number {
+  color: #ffff;
+  margin: 0px 0px 0px 0px;
+  padding: 20px;
+  font-family: "Droid Serif","Palatino Linotype","Book Antiqua",Palatino,"Microsoft YaHei","Songti SC",serif;
+}
+
+h1, h2, h3 {
+  font-family: "Yanone Kaffeesatz", Tahoma, Geneva, sans-serif;
+  font-weight: normal;
+}
+
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+
+
+</style>
+
+
+
+<img src = 'img/cas.png'>
+
+<h1 class="title"> 2017 CAS Spring Meeting </h1>
+<h2 class="title"> <span class="red"> Introduction </span> to <code class="remark-inline-code">R</code>   </h2>
+
+<h3 class="title"> Rajesh Sahasrabuddhe</h3>
+
+<h3 class="title"> Alexandra Taggart</h3>
+
+<img src = 'img/logo.png' height="25px">
+
+---
+layout: true
+
+
+<footer>
+<img src = 'img/logo.png' height="15px" style = "position: absolute; right: 0px; bottom: 30px; left: 30px; text-align: center;">
+</footer>
+
+---
+
+# Learning Objectives
+
+--
+
+<ol>
+  <li> Install <code class="remark-inline-code">R</code>, R Studio and any of the many thousands of <code class="remark-inline-code">R</code> packages. </li>
+
+--
+
+  <li> Fetch and visualize data in <code class="remark-inline-code">R</code>. </li>
+
+--
+
+  <li> Model data in <code class="remark-inline-code">R</code> and save the results </li>
+
+</ol>
+
+---
+
+# Requirements for this workshop
+
+--
+
+<ol>
+  <li> A functioning laptop (PC or Mac) </li>
+
+--
+
+  <li> Installation of <code class="remark-inline-code">R</code> and R Studio in advance of the workshop </li>
+
+--
+
+  <li> Patience, enthusiasm and a sense of humor </li>
+
+</ol>
+
+---
+
+# Schedule
+
+--
+
+```{r eval=require('DT'), tidy=FALSE, echo=FALSE}
+sch <- data.frame(Time = c("1:15 - 1:30", "1:30 - 2:00", "2:00 - 2:30",
+  "2:30 - 3:00", "3:00 - 3:30", "3:30 - 4:00", "4:00 - 4:15"),
+  Activity = c("Preliminaries", "Motivation and Fundamentals", "Reading Data",
+    "Break (optional)", "Visualizing Data", "Fitting Model", "Wrap-up"))
+
+DT::datatable(
+  sch,
+  rownames = FALSE,
+  filter = 'none',
+  selection = 'none',
+  fillContainer = FALSE, options = list(
+    pageLength = 7,
+    columnDefs = list(
+      list(className = 'dt-center', targets = list(0,1))#,
+      #list(width = list('20%', '80%'), targets = list(0,1))
+    )
+  ))
+```
+
+---
+
+# How many people
+
+--
+<ol>
+  <li> Know <code class="remark-inline-code">R</code> as 18th letter of the modern English alphabet? </li>
+
+--
+
+  <li> Have heard of <code class="remark-inline-code">R</code> in an actuarial context? </li>
+
+--
+
+  <li> Know someone who uses <code class="remark-inline-code">R</code> for actuarial analyses? </li>
+
+--
+
+  <li> Have written an <code class="remark-inline-code">R</code> script? </li>
+
+--
+
+  <li> Understand that <code class="remark-inline-code">R</code> follows (not precedes) <code class="remark-inline-code">S</code> </li>
+
+--
+
+  <li> Know who Hadley Wikham is? </li>
+
+</ol>
+
+---
+
+
+# What We Will Do Today
+
+<ol>
+  <li> Learn how to code in <code class="remark-inline-code">R</code></li>
+  <li> Methods for learning </li>
+  <ol>
+    <li> <span style="color:red"><b>I</b></span> speak at <span style="color:red"><b>You</b></span> - this is ineffective </li>
+    <li> <span style="color:red"><b>I</b></span> specify a problem and <span style="color:red"><b>You</b></span> solve it - this can be effective </li>
+    <li> <span style="color:red"><b>You</b></span> have a problem and <span style="color:red"><b>You</b></span> solve it - this is the best way to learn </li>
+  </ol>
+</ol>
+
+---
+
+# Motivation
+> "Fundamentally learning about the world through data is really, really cool."<br>
+> ~ Hadley Wickham, prolific R developer
+
+## What is <code class="remark-inline-code">R</code>
+<div class="rlogo"> <img src="img/rlogo.png" width="100px"> </div>
+
+<ol>
+  <li> <code class="remark-inline-code">R</code> is a free software environment for statistical computing and graphics.</li>
+
+  <li> <code class="remark-inline-code">R</code> != R Studio  </li>
+</ol>
+<div class="rlogo"> <img src="img/RStudio-Logo-Blue-Gray-125.png"> </div>
+<ol>
+  <li> RStudio is an integrated development environment (IDE) for <code class="remark-inline-code">R</code>. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.</li>
+</ol>
+
+---
+
+# Why should I Use <code class="remark-inline-code">R</code>
+<ol>
+  <li> Everyone else (i.e. all the cool kids) is / are doing it </li>
+```{r, fig.width=6, message=FALSE, warning=FALSE, echo=FALSE}
+library(magrittr)
+library(highcharter)
+df <- data.frame(
+'tool' = c('Excel', 'R', 'Specialized Software', 'In house', 'Other'),
+'pct' = c(.33, 0, 0, .50, .17) * 100)
+
+highchart(height = 400) %>%
+  hc_title(text = "Reserving Tool", align = "left") %>%
+  hc_add_series_df(data = df, type = "column", x = tool, y = pct) %>%
+  hc_xAxis(categories = df$tool) %>%
+  hc_legend(enabled = FALSE) %>%
+  hc_yAxis(title = list(text = "Percentage"),
+    labels = list(format = "{value}%"), max = 80) %>%
+  hc_annotations(list(xValue = 1, yValue = 65,
+    title =
+      list(text =
+        "Source: 2016 ASTIN WORKING PARTY ON NON LIFE RESERVING PRACTICES (USA)")))
+
+```
+  <li>Umm ... Maybe Not :( </li>
+</ol>
+
+---
+
+# Why Should I Use <code class="remark-inline-code">R</code>
+<ol>
+  <li> What is An Actuary? We manage risk. It's what we do. With <i>unbeatable analytical skills</i>, we help organizations plan for the future and protect themselves from loss. (http://www.beanactuary.org/what/) </li>
+  <li> So what is the right tool to apply these <i>unbeatable anaytical skills</i>?</li>
+  <ol>
+    <li> <div class="rlogo"> <img src="img/Logo_Excel_137x60.png" width="100px"> </div></li>
+    <li> Arius, ResQ, ICRFS, ReservePro, Igloo</li>
+  </ol>
+  <li>Considerations</li>
+  <ol>
+    <li> Transparency</li>
+    <li> Cost</li>
+    <li> Who picks the model?</li>
+    <li> Documentation / Document Production</li>
+  </ol>
+</ol>
+
+---
+
+# Why Should I Use <code class="remark-inline-code">R</code>
+> "These technological changes are quite fundamental and will materially alter the way that actuaries do their work and what work actuaries do. As the technology advances, the complexity of the work will increase, making the approaches I used in the middle of my career seem simplistic by comparison. For example, aggregating data into loss development triangles may be completely supplanted by analysis at the claim level, looking at the attributes of claims that are predictive of their future development."
+> 
+> President's Message: Meeting the Future Educational Needs of Actuaries: Is the Profession at a Strategic Crossroads? By Stephen P. Lowe (Actuarial Review, October 2016)
+
+---
+
+# Why Should I Use <code class="remark-inline-code">R</code>
+
+> "There are definitely some academic statisticians who just don't understand why what I do is statistics, but basically I think they are all wrong . What I do is fundamentally statistics. The fact that ~~data science exists as a field~~ **insurers feel the need to hire  data scientists** is a colossal failure of ~~statistics~~ **the acturial profession**. To me, that is what statistics is all about. It is gaining insight from data using modelling and visualization. Data munging and manipulation is hard and statistics has just said that's not our domain."
+>
+> Hadley Wikham
+
+<ol>
+<li> <a href="https://blogs.technet.microsoft.com/machinelearning/2015/04/06/microsoft-closes-acquisition-of-revolution-analytics/">Microsoft Closes Acquisition of Revolution Analytics</a>
+<div class="rlogo"> <img src="img/RevoClose.png" width="300px"> </div></li>
+</ol>
+
+---
+
+# Why Do I Prefer <code class="remark-inline-code">R</code>
+<ol>
+--
+  <li> Better tools for me to see patterns in data  </li>
+--
+  <li> Allows me to look at more data </li>
+--
+  <li> Vectorized operation allow for scaling without cost </li>
+--
+  <li> Availability and rapid development of statistical functions </li>
+--
+  <li> Hadley Wickham </li>
+</ol>
+
+---
+
+# What is <code class="remark-inline-code">R</code>
+
+> <code class="remark-inline-code">R</code> has had a revolutionary effect on the way statistics are communicated.  
+> --- John Chambers
+
+<ol>
+  <li> <code class="remark-inline-code">R</code> provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering, ...) and graphical techniques, and is highly extensible. </li>
+  <li> One of <code class="remark-inline-code">R</code>'s strengths is the ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed. Great care has been taken over the defaults for the minor design choices in graphics, but the user retains full control.</li>
+  <li> <code class="remark-inline-code">R</code> is available as Free Software under the terms of the Free Software Foundationâs GNU General Public License in source code form.</li>
+</ol>
+
+---
+
+# What is <code class="remark-inline-code">R</code>?
+R is an integrated suite of software facilities for **data manipulation, calculation and graphical display.** It includes an effective **data handling** and storage facility, a suite of operators for **calculations on arrays, in particular matrices**, a large, coherent, integrated collection of intermediate tools for **data analysis, graphical facilities for data analysis and display either on-screen or on hardcopy, and a well-developed, simple and effective programming language** which includes conditionals, loops, user-defined recursive functions and input and output facilities.
+
+The term "environment" is intended to characterize it as a fully planned and coherent system, rather than an incremental accretion of very specific and inflexible tools, as is frequently the case with other data analysis software.
+
+---
+
+# What is <code class="remark-inline-code">R</code>?
+<code class="remark-inline-code">R</code>, like <code class="remark-inline-code">S</code>, is designed around a true computer language, and it allows users to add additional functionality by defining new functions. 
+
+Many users think of <code class="remark-inline-code">R</code> as a statistics system. We prefer to think of it of an environment within which statistical techniques are implemented. <code class="remark-inline-code">R</code> can be extended (easily) via packages. There are about eight packages supplied with the <code class="remark-inline-code">R</code> distribution and many more are available through the CRAN family of Internet sites covering a very wide range of modern statistics.
+
+(https://www.r-project.org/about.html)

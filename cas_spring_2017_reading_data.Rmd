@@ -1,0 +1,192 @@
+---
+title: "Presentation Ninja"
+subtitle: "<br/>with xaringan"
+author: "Yihui Xie"
+date: "2016/12/12"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    yolo: FALSE
+    seal: FALSE
+    css: ["default", "extra.css"]
+    self_contained: FALSE
+    nature:
+      highlightStyle: github
+      highlightLines: TRUE
+      countIncrementalSlides: FALSE
+      ratio: '16:9'
+---
+class: center, middle, title-slide
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+<style>
+.remark-slide-number {
+  color: #ffff;
+  margin: 0px 0px 0px 0px;
+  padding: 20px;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
+
+h1, h2, h3 {
+  font-family: "Yanone Kaffeesatz", Tahoma, Geneva, sans-serif;
+  font-weight: normal;
+}
+
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+
+excercise {
+  color: #006d9e;
+  font-weight:  bold;
+}
+
+
+</style>
+
+<img src = 'img/cas.png'>
+
+<h1 class="title"> 2017 CAS Spring Meeting </h1>
+<h2 class="title"> <span class="red"> Introduction </span> to <code class="remark-inline-code">R</code>: Modling Data and Saving Results</h2>
+
+<h3 class="title"> Rajesh Sahasrabuddhe</h3>
+
+<h3 class="title"> Alexandra Taggart</h3>
+<br>
+<img src = 'img/logo.png' height="25px">
+
+---
+layout: true
+
+
+<footer>
+<img src = 'img/logo.png' height="15px" style = "position: absolute; right: 0px; bottom: 30px; left: 30px; text-align: center;">
+</footer>
+
+---
+
+# Setup
+
+--
+
+<ol>
+  <li> Install R <a href="https://www.r-project.org/">https://www.r-project.org/</a> </li>
+--
+
+  <li> Install R Studio <a href="https://www.rstudio.com/products/rstudio/download2/">https://www.rstudio.com/products/rstudio/download2/</a></li>
+
+--
+
+  <li> Install Packages </li>
+  
+  <ol>
+    <li> from R Studio GUI </li>
+--
+    <li> from console <br><code class="remark-inline-code">install.packages(pkgs = 'tidyverse')</code></li>
+    <li> <code class="remark-inline-code">devtools::install_github()</code></li>
+  </ol>
+</ol>
+
+---
+
+# Basics
+
+<ol>
+  <li>Assignment operator (<code class="remark-inline-code"><-</code>)</li>
+  <li>Help (<code class="remark-inline-code">?, ??</code>)</li>
+  <li>Classes (<code class="remark-inline-code">"numeric", "logical", "character" or "list", "matrix", "array", "factor" and "data.frame"</code>)</li>
+  <li>The structure function (<code class="remark-inline-code">str</code>)</li>
+  <li>The <code class="remark-inline-code">tidyverse</code>
+  <li>Styleguide <a href="http://adv-r.had.co.nz/Style.html">http://adv-r.had.co.nz/Style.html</a></li>
+</ol>
+
+---
+
+# Read Data
+
+<ol>
+  <li> Comma-seprated values (<code class="remark-inline-code">read.csv, readr::read_csv</code>)</li>
+  <li> Comma-seprated values (<code class="remark-inline-code">readxl::read_excel</code>)</li>
+</ol>
+
+---
+
+# Exercise 1
+
+Locate the <code class="remark-inline-code">mtcars.csv</code> file that comes with <code class="remark-inline-code">readr</code>
+```{r}
+library(readr)
+readr_example("mtcars.csv")
+```
+<excercise>Read this file using <code class="remark-inline-code">read.csv</code> and assign this to object <code class="remark-inline-code">cas01</code><br>
+<excercise>Read this file using <code class="remark-inline-code">read_csv</code> and assign this to object <code class="remark-inline-code">cas02</code><br>
+What is the difference between the files?
+</excercise>
+
+---
+
+# Solution 1
+
+```{r, message=FALSE}
+fn <- readr_example("mtcars.csv")
+cas01 <- read.csv(file = fn)
+cas02 <- read_csv(file = fn)
+class(cas01)
+class(cas02)
+```
+
+---
+
+# Exercise 2
+
+Locate the <code class="remark-inline-code">mtcars.csv</code> file that comes with <code class="remark-inline-code">readr</code>
+```{r}
+library(readxl)
+readxl_example('deaths.xlsx')
+```
+<excercise>Read this file using <code class="remark-inline-code">read_excel</code> and assign this to object <code class="remark-inline-code">cas03</code><br>
+How many row and columns does this dataframe contain?
+</excercise>
+
+---
+
+# Solution 2: Try #1
+
+```{r, message=FALSE}
+fn <- readxl_example('deaths.xlsx')
+cas03 <- read.csv(fn)
+str(cas03)
+```
+
+---
+
+# Solution 2: Try #2
+
+```{r}
+fn <- readxl_example('deaths.xlsx')
+cas03 <- read_excel(fn, sheet = 'arts' , range = 'a5:f15')
+str(cas03)
+```
+
+
+---
+
+# Read in CAS Data
+```{r}
+auto_dat_cas <- read_csv('http://www.casact.org/research/reserve_data/ppauto_pos.csv')
+```
+
+
+
+

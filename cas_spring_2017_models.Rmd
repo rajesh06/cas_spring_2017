@@ -1,0 +1,227 @@
+---
+title: "Presentation Ninja"
+subtitle: "<br/>with xaringan"
+author: "Yihui Xie"
+date: "2016/12/12"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    yolo: FALSE
+    seal: FALSE
+    css: ["default", "extra.css"]
+    self_contained: FALSE
+    nature:
+      highlightStyle: github
+      highlightLines: TRUE
+      countIncrementalSlides: FALSE
+      ratio: '16:9'
+---
+class: center, middle, title-slide
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+<style>
+.remark-slide-number {
+  color: #ffff;
+  margin: 0px 0px 0px 0px;
+  padding: 20px;
+  font-family: "Droid Serif","Palatino Linotype","Book Antiqua",Palatino,"Microsoft YaHei","Songti SC",serif;
+}
+
+h1, h2, h3 {
+  font-family: "Yanone Kaffeesatz", Tahoma, Geneva, sans-serif;
+  font-weight: normal;
+}
+
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+
+
+</style>
+
+
+
+<img src = 'img/cas.png'>
+
+<h1 class="title"> 2017 CAS Spring Meeting </h1>
+<h2 class="title"> <span class="red"> Introduction </span> to <code class="remark-inline-code">R</code>: Fitting Models and Saving Results</h2>
+
+<h3 class="title"> Rajesh Sahasrabuddhe</h3>
+
+<h3 class="title"> Alexandra Taggart</h3>
+
+<img src = 'img/logo.png' height="25px">
+
+---
+layout: true
+
+
+<footer>
+<img src = 'img/logo.png' height="15px" style = "position: absolute; right: 0px; bottom: 30px; left: 30px; text-align: center;">
+</footer>
+
+---
+
+# Basics
+
+<ol>
+  <li>A mathematical model is a description of a system using mathematical concepts and language.</li>
+  <li>Models are R objects like any others</li>
+  <li>Common Actuarial Models (not a complete list)</li>
+  <ol>
+    <li>Linear Models (Relationships)</li>
+    <li>Distributions</li>
+  </ol>
+</ol>
+
+
+---
+
+# The Linear Model (OLS)
+
+```{r}
+lm1 <- lm(mpg ~ wt, data = mtcars)
+```
+
+<ol>
+  <li> Summary (via) <code>summary.lm</code></li>
+  <li> Predict (via) <code>summary.lm</code></li>
+  <li><code>lm.influence</code> and <code>confint</code></li>
+<ol>
+
+---
+
+# The Linear Model (OLS)
+
+```{r}
+summary(lm1)
+```
+
+
+---
+
+# The Linear Model (OLS)
+
+```{r, fig.height=5}
+plot(lm1, which = 1:2)
+```
+---
+
+# The Linear Model (OLS)
+
+```{r, fig.height=5}
+plot(lm1, which = c(3,5))
+```
+---
+
+# The Linear Model (OLS)
+
+```{r, fig.height=5}
+confint(lm1)
+predict(object = lm1, newdata = data.frame(wt = 3))
+```
+
+---
+
+# The Linear Model (OLS)
+
+```{r, fig.height=5}
+new_mpg <- predict(object = lm1, newdata = data.frame(wt = 3))
+plot(x = mtcars$wt, y = mtcars$mpg)
+points(x = 3, y = new_mpg, col = "blue", pch = 19)
+abline(v = 3, lty = 'dotted', col = 'blue')
+abline(h = new_mpg, lty = 'dotted', col = 'blue')
+```
+
+---
+# Exercise 1
+
+
+Fit a linear model regressing distance on speed in the <code>datasets::cars</code> data.
+<ol>
+<li>Provide the coefficient of disatance</li>
+<li>Plot the model (in orange) against the data (in blue).</li>
+<li>Extract the residual of the 10th data point</li>
+</ol>
+
+---
+# Solution 1
+
+```{r, fig.height=4}
+plot(cars$speed, cars$dist, col = 'blue')
+lm2 <- lm(dist ~ speed, data = cars)
+abline(lm2, col= "orange")
+```
+---
+# Solution 1
+
+```{r, fig.height=3}
+coefficients(lm2)
+confint(lm2)
+#str(lm2)
+lm2$residuals[10]
+```
+
+---
+# Solution 1
+
+```{r, fig.height=4}
+plot(cars$speed, cars$dist, col = 'blue')
+abline(lm2, col = 'orange')
+points(cars$speed[10], cars$dist[10], col = 'red', pch = 19)
+new_y <- predict(lm2, newdata = data.frame(speed = cars$speed[10]))
+points(cars$speed[10], new_y, col = 'red', pch = 19)
+text(x = cars$speed[10] + .5, y = mean(new_y, cars$dist[10]) - 2, col = ' red',
+  labels = paste('Resid =', round(cars$dist[10] - new_y, 3)), adj = c(0,0.5))
+
+```
+---
+
+# Exercise 2
+
+The <code>mixtools</code> packages includes functions to fit finite mixture distributions.
+<ol>
+  <li> Review the faithful dataset via <code>?faithful</code></li>
+  <li> Use the normalmixEM function to fit a two component mixture of normals to the <code>waiting</code> variable in the <code>faithful</code> data using the following assumptions:</li>
+  <ol>
+    <li> Using a starting seed of <code>12345</code></li>
+    <li> Using a 50/50 weighting for the starting mix rates </li>
+    <li> With the components certered 55 and 80</li>
+    <li> With each of the components have a standard deviations of 5</li>
+  </ol>
+  <li> Report the parameters of the model </li>
+  <li> Create a plot that compares the data and models</li>
+
+---
+
+# Solution 2
+
+
+
+```{r}
+# install.packages(mixtools)
+library(mixtools)
+set.seed(12345)
+wait1 <- normalmixEM(faithful$waiting, lambda = .5, mu = c(55, 80), sigma = 5)
+summary(wait1)
+
+```
+---
+
+# Solution 2
+
+```{r, fig.height=5}
+# install.packages(mixtools)
+plot(wait1, density = TRUE, cex.axis = 1.4, cex.lab = 1.4, cex.main = 1.8, 
+  main2 = "Time between Old Faithful eruptions", xlab2 = "Minutes", which = 2)
+```

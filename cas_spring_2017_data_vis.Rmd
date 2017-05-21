@@ -1,0 +1,200 @@
+---
+title: "Presentation Ninja"
+subtitle: "<br/>with xaringan"
+author: "Yihui Xie"
+date: "2016/12/12"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    yolo: FALSE
+    seal: FALSE
+    css: ["default", "extra.css"]
+    self_contained: FALSE
+    nature:
+      highlightStyle: github
+      highlightLines: TRUE
+      countIncrementalSlides: FALSE
+      ratio: '16:9'
+---
+class: center, middle, title-slide
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+<style>
+.remark-slide-number {
+  color: #ffff;
+  margin: 0px 0px 0px 0px;
+  padding: 20px;
+  font-family: "Droid Serif","Palatino Linotype","Book Antiqua",Palatino,"Microsoft YaHei","Songti SC",serif;
+}
+
+h1, h2, h3 {
+  font-family: "Yanone Kaffeesatz", Tahoma, Geneva, sans-serif;
+  font-weight: normal;
+}
+
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+
+
+</style>
+
+
+
+<img src = 'img/cas.png'>
+
+<h1 class="title"> 2017 CAS Spring Meeting </h1>
+<h2 class="title"> <span class="red"> Introduction </span> to <code class="remark-inline-code">R</code>: Data Visualization</h2>
+
+<h3 class="title"> Rajesh Sahasrabuddhe</h3>
+
+<h3 class="title"> Alexandra Taggart</h3>
+
+<img src = 'img/logo.png' height="25px">
+
+---
+layout: true
+
+
+<footer>
+<img src = 'img/logo.png' height="15px" style = "position: absolute; right: 0px; bottom: 30px; left: 30px; text-align: center;">
+</footer>
+
+---
+
+# Basics: The Pipe
+
+<ol>
+  <li>The pipe, <code>%>%</code>, comes from the <code>magrittr</code> package by Stefan Milton Bache. Packages in the tidyverse load <code>%>%</code> for you automatically, so you don’t usually load magrittr explicitly.</li>
+
+  <li>Ctrl + Shift + M is the keyboard shortcut for the pipe.</li>
+
+  <li>The pipe allows for much more readable code</li>
+
+  <li> x %>% foo(y) %>% bar() is the same as bar(foo(x, y)) </li>
+</ol>
+
+
+---
+
+
+# Popular Plotting Systems
+
+<ol>
+  <li>Raster Graphics</li>
+  <ol>
+    <li> ggplot (<code class="remark-inline-code">ggplot2</code>) </li>
+    <li> base </li>
+    <li> lattice </li>
+  </ol>
+  <li>HTML Canvas</li>
+  <ol>
+    <li>rbokeh</li>
+    <li>googlevis</li>
+    <li>highcharts (not free for commercial use)</li>
+  </ol>
+  <li>Primary Differences</li>
+  <ol>
+    <li>Form of output</li>
+    <li>Code Structure</li>
+  </ol>
+</ol>  
+---
+
+# Scatter Plot via Base Graphics
+
+```{r, fig.height=5, message=FALSE, warning=FALSE}
+plot(x = iris$Sepal.Length, y = iris$Sepal.Width)
+
+```
+
+---
+
+# Scatter Plot via Rbokeh
+
+```{r, fig.height=5, message=FALSE, warning=FALSE}
+library(rbokeh)
+figure() %>% ly_points(Sepal.Length, Sepal.Width, data = iris)
+```
+
+---
+
+# Scatter Plot via Ggplot
+
+```{r, fig.height=5, message=FALSE, warning=FALSE}
+library(ggplot2)
+ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
+
+```
+
+---
+
+# Scatter Plot via highcharter
+
+
+```{r, fig.height=3, message=FALSE, warning=FALSE}
+library(highcharter)
+highchart() %>% 
+  hc_add_series_scatter(x = iris$Sepal.Length, y = iris$Sepal.Width)
+```
+
+---
+
+# Exercise 1
+
+```{r}
+head(mtcars)
+```
+
+Create a scatterplot of mpg v weight using base and one other plotting system (suggest ggplot)
+
+---
+
+# Solution 1.1
+
+```{r, fig.height=5, message=FALSE, warning=FALSE}
+plot(x = mtcars$wt, y = mtcars$mpg)
+```
+---
+
+# Solution 1.2
+
+```{r, fig.height=5, message=FALSE, warning=FALSE}
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) + geom_point()
+```
+
+---
+
+# Exercise 2
+
+```{r, fig.height=5, message=FALSE, warning=FALSE}
+head(faithful)
+```
+
+Create a histogram of the eruptions variable using base plotting and one other plotting system
+
+---
+
+# Solution 2.1
+
+```{r, fig.height=5, message=FALSE, warning=FALSE}
+hist(x = faithful$eruptions)
+```
+---
+
+# Solution 2.2
+
+```{r, fig.height=5, message=FALSE, warning=FALSE}
+figure(width = 600, height = 400) %>%
+  ly_hist(eruptions, data = faithful)
+```

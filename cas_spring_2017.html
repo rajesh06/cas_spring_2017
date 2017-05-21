@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Presentation Ninja</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Yihui Xie" />
+    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <script src="libs/proj4js/proj4.js"></script>
+    <link href="libs/highcharts/css/motion.css" rel="stylesheet" />
+    <script src="libs/highcharts/highstock.js"></script>
+    <script src="libs/highcharts/highcharts-3d.js"></script>
+    <script src="libs/highcharts/highcharts-more.js"></script>
+    <script src="libs/highcharts/modules/annotations.js"></script>
+    <script src="libs/highcharts/modules/broken-axis.js"></script>
+    <script src="libs/highcharts/modules/data.js"></script>
+    <script src="libs/highcharts/modules/drilldown.js"></script>
+    <script src="libs/highcharts/modules/exporting.js"></script>
+    <script src="libs/highcharts/modules/funnel.js"></script>
+    <script src="libs/highcharts/modules/heatmap.js"></script>
+    <script src="libs/highcharts/modules/map.js"></script>
+    <script src="libs/highcharts/modules/no-data-to-display.js"></script>
+    <script src="libs/highcharts/modules/offline-exporting.js"></script>
+    <script src="libs/highcharts/modules/solid-gauge.js"></script>
+    <script src="libs/highcharts/modules/treemap.js"></script>
+    <script src="libs/highcharts/plugins/annotations.js"></script>
+    <script src="libs/highcharts/plugins/draggable-legend.js"></script>
+    <script src="libs/highcharts/plugins/draggable-points.js"></script>
+    <script src="libs/highcharts/plugins/export-csv.js"></script>
+    <script src="libs/highcharts/plugins/grouped-categories.js"></script>
+    <script src="libs/highcharts/plugins/motion.js"></script>
+    <script src="libs/highcharts/plugins/pattern-fill-v2.js"></script>
+    <script src="libs/highcharts/plugins/tooltip-delay.js"></script>
+    <script src="libs/highcharts/custom/reset.js"></script>
+    <script src="libs/highcharts/custom/symbols-extra.js"></script>
+    <script src="libs/highcharts/custom/text-symbols.js"></script>
+    <link href="libs/fontawesome/font-awesome.min.css" rel="stylesheet" />
+    <link href="libs/htmlwdgtgrid/htmlwdgtgrid.css" rel="stylesheet" />
+    <script src="libs/highchart-binding/highchart.js"></script>
+    <link rel="stylesheet" href="extra.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, title-slide
+
+
+
+&lt;style&gt;
+.remark-slide-number {
+  color: #ffff;
+  margin: 0px 0px 0px 0px;
+  padding: 20px;
+  font-family: "Droid Serif","Palatino Linotype","Book Antiqua",Palatino,"Microsoft YaHei","Songti SC",serif;
+}
+
+h1, h2, h3 {
+  font-family: "Yanone Kaffeesatz", Tahoma, Geneva, sans-serif;
+  font-weight: normal;
+}
+
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+
+
+&lt;/style&gt;
+
+
+
+&lt;img src = 'img/cas.png'&gt;
+
+&lt;h1 class="title"&gt; 2017 CAS Spring Meeting &lt;/h1&gt;
+&lt;h2 class="title"&gt; &lt;span class="red"&gt; Introduction &lt;/span&gt; to R   &lt;/h2&gt;
+
+&lt;h3 class="title"&gt; Rajesh Sahasrabuddhe&lt;/h3&gt;
+
+&lt;h3 class="title"&gt; Alexandra Taggart&lt;/h3&gt;
+
+&lt;img src = 'img/logo.png' height="25px"&gt;
+
+---
+layout: true
+
+
+&lt;footer&gt;
+&lt;img src = 'img/logo.png' height="15px" style = "position: absolute; right: 0px; bottom: 30px; left: 30px; text-align: center;"&gt;
+&lt;/footer&gt;
+
+---
+
+# Learning Objectives
+
+--
+
+&lt;ol&gt;
+  &lt;li&gt; Install R, R Studio and any of the many thousands of R packages. &lt;/li&gt;
+
+--
+
+  &lt;li&gt; Fetch and visualize data in R. &lt;/li&gt;
+
+--
+
+  &lt;li&gt; Model data in R and save the results &lt;/li&gt;
+
+&lt;/ol&gt;
+
+---
+
+# Requirements for this workshop
+
+--
+
+&lt;ol&gt;
+  &lt;li&gt; A functioning laptop (PC or Mac) &lt;/li&gt;
+
+--
+
+  &lt;li&gt; Installation of R and R Studio in advance of the workshop &lt;/li&gt;
+
+--
+
+  &lt;li&gt; Patience, enthusiasm and a sense of humor &lt;/li&gt;
+
+&lt;/ol&gt;
+
+---
+
+# Schedule
+
+--
+
+<div id="htmlwidget-becc93ecb8f89c110aa4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-becc93ecb8f89c110aa4">{"x":{"filter":"none","fillContainer":false,"data":[["1:15 - 1:30","1:30 - 2:00","2:00 - 2:30","2:30 - 3:00","3:00 - 3:30","3:30 - 4:00","4:00 - 4:15"],["Preliminaries","Motivation and Fundamentals","Reading Data","Break (optional)","Visualizing Data","Fitting Model","Wrap-up"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Time<\/th>\n      <th>Activity<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":7,"columnDefs":[{"className":"dt-center","targets":[0,1]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[7,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# How many people
+
+--
+&lt;ol&gt;
+  &lt;li&gt; Know &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; as 18th letter of the modern English alphabet? &lt;/li&gt;
+
+--
+
+  &lt;li&gt; Have heard of &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; in an actuarial context? &lt;/li&gt;
+
+--
+
+  &lt;li&gt; Know someone who uses &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; for actuarial analyses? &lt;/li&gt;
+
+--
+
+  &lt;li&gt; Have written an &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; script? &lt;/li&gt;
+
+--
+
+  &lt;li&gt; Understand that &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; follows (not precedes) &lt;code class="remark-inline-code"&gt;S&lt;/code&gt; &lt;/li&gt;
+
+--
+
+  &lt;li&gt; Know who Hadley Wikham is? &lt;/li&gt;
+
+&lt;/ol&gt;
+
+---
+
+
+# What We Will Do Today
+
+&lt;ol&gt;
+  &lt;li&gt; Learn how to code in &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt; Methods for learning &lt;/li&gt;
+  &lt;ol&gt;
+    &lt;li&gt; &lt;span style="color:red"&gt;&lt;b&gt;I&lt;/b&gt;&lt;/span&gt; speak at &lt;span style="color:red"&gt;&lt;b&gt;You&lt;/b&gt;&lt;/span&gt; - this is ineffective &lt;/li&gt;
+    &lt;li&gt; &lt;span style="color:red"&gt;&lt;b&gt;I&lt;/b&gt;&lt;/span&gt; specify a problem and &lt;span style="color:red"&gt;&lt;b&gt;You&lt;/b&gt;&lt;/span&gt; solve it - this can be effective &lt;/li&gt;
+    &lt;li&gt; &lt;span style="color:red"&gt;&lt;b&gt;You&lt;/b&gt;&lt;/span&gt; have a problem and &lt;span style="color:red"&gt;&lt;b&gt;You&lt;/b&gt;&lt;/span&gt; solve it - this is the best way to learn &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/ol&gt;
+
+---
+
+# Motivation
+&gt; "Fundamentally learning about the world through data is really, really cool."&lt;br&gt;
+&gt; ~ Hadley Wickham, prolific R developer
+
+## What is &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;
+&lt;div class="rlogo"&gt; &lt;img src="img/rlogo.png" width="100px"&gt; &lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt; &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; is a free software environment for statistical computing and graphics.&lt;/li&gt;
+
+  &lt;li&gt; &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; != R Studio  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="rlogo"&gt; &lt;img src="img/RStudio-Logo-Blue-Gray-125.png"&gt; &lt;/div&gt;
+&lt;ol&gt;
+  &lt;li&gt; RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.&lt;/li&gt;
+&lt;/ol&gt;
+
+---
+
+# Why should I Use &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;
+&lt;ol&gt;
+  &lt;li&gt; Everyone else (i.e. all the cool kids) is / are doing it &lt;/li&gt;
+<div id="htmlwidget-fb8e872d6fd4261a241f" style="width:100%;height:400px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fb8e872d6fd4261a241f">{"x":{"hc_opts":{"title":{"text":"Reserving Tool","align":"left"},"yAxis":{"title":{"text":"Percentage"},"labels":{"format":"{value}%"},"max":80},"credits":{"enabled":false},"exporting":{"enabled":false},"plotOptions":{"series":{"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"},"bubble":{"minSize":5,"maxSize":25}},"annotationsOptions":{"enabledButtons":false},"tooltip":{"delayForDisplay":10},"series":[{"type":"column","data":[{"tool":"Excel","pct":33,"y":33,"name":"Excel"},{"tool":"R","pct":0,"y":0,"name":"R"},{"tool":"Specialized Software","pct":0,"y":0,"name":"Specialized Software"},{"tool":"In house","pct":50,"y":50,"name":"In house"},{"tool":"Other","pct":17,"y":17,"name":"Other"}]}],"xAxis":{"categories":["Excel","R","Specialized Software","In house","Other"]},"legend":{"enabled":false},"annotations":[{"xValue":1,"yValue":65,"title":{"text":"Source: 2016 ASTIN WORKING PARTY ON NON LIFE RESERVING PRACTICES (USA)"}}]},"theme":{"chart":{"backgroundColor":"transparent"}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+  &lt;li&gt;Umm ... Maybe Not :( &lt;/li&gt;
+&lt;/ol&gt;
+
+---
+
+# Why Should I Use &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;
+&lt;ol&gt;
+  &lt;li&gt; What is An Actuary? We manage risk. It's what we do. With &lt;i&gt;unbeatable analytical skills&lt;/i&gt;, we help organizations plan for the future and protect themselves from loss. (http://www.beanactuary.org/what/) &lt;/li&gt;
+  &lt;li&gt; So what is the right tool to apply these &lt;i&gt;unbeatable anaytical skills&lt;/i&gt;?&lt;/li&gt;
+  &lt;ol&gt;
+    &lt;li&gt; &lt;div class="rlogo"&gt; &lt;img src="img/Logo_Excel_137x60.png" width="100px"&gt; &lt;/div&gt;&lt;/li&gt;
+    &lt;li&gt; Arius, ResQ, ICRFS, ReservePro, Igloo&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;li&gt;Considerations&lt;/li&gt;
+  &lt;ol&gt;
+    &lt;li&gt; Transparency&lt;/li&gt;
+    &lt;li&gt; Cost&lt;/li&gt;
+    &lt;li&gt; Who picks the model?&lt;/li&gt;
+    &lt;li&gt; Documentation / Document Production&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/ol&gt;
+
+---
+
+# Why Should I Use &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;
+&gt; "These technological changes are quite fundamental and will materially alter the way that actuaries do their work and what work actuaries do. As the technology advances, the complexity of the work will increase, making the approaches I used in the middle of my career seem simplistic by comparison. For example, aggregating data into loss development triangles may be completely supplanted by analysis at the claim level, looking at the attributes of claims that are predictive of their future development."
+&gt; 
+&gt; President's Message: Meeting the Future Educational Needs of Actuaries: Is the Profession at a Strategic Crossroads? By Stephen P. Lowe (Actuarial Review, October 2016)
+
+---
+
+# Why Should I Use &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;
+
+&gt; "There are definitely some academic statisticians who just don't understand why what I do is statistics, but basically I think they are all wrong . What I do is fundamentally statistics. The fact that ~~data science exists as a field~~ **insurers feel the need to hire  data scientists** is a colossal failure of ~~statistics~~ **the acturial profession**. To me, that is what statistics is all about. It is gaining insight from data using modelling and visualization. Data munging and manipulation is hard and statistics has just said that's not our domain."
+&gt;
+&gt; Hadley Wikham
+
+&lt;ol&gt;
+&lt;li&gt; &lt;a href="https://blogs.technet.microsoft.com/machinelearning/2015/04/06/microsoft-closes-acquisition-of-revolution-analytics/"&gt;Microsoft Closes Acquisition of Revolution Analytics&lt;/a&gt;
+&lt;div class="rlogo"&gt; &lt;img src="img/RevoClose.png" width="300px"&gt; &lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+---
+
+# Why Do I Prefer &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;
+&lt;ol&gt;
+--
+  &lt;li&gt; Better tools for me to see patterns in data  &lt;/li&gt;
+--
+  &lt;li&gt; Allows me to look at more data &lt;/li&gt;
+--
+  &lt;li&gt; Vectorized operation allow for scaling without cost &lt;/li&gt;
+--
+  &lt;li&gt; Availability and rapid development of statistical functions &lt;/li&gt;
+--
+  &lt;li&gt; Hadley Wickham &lt;/li&gt;
+&lt;/ol&gt;
+
+---
+
+# What is &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;
+
+&gt; &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; has had a revolutionary effect on the way statistics are communicated.  
+&gt; --- John Chambers
+
+&lt;ol&gt;
+  &lt;li&gt; &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering, ...) and graphical techniques, and is highly extensible. &lt;/li&gt;
+  &lt;li&gt; One of &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;'s strengths is the ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed. Great care has been taken over the defaults for the minor design choices in graphics, but the user retains full control.&lt;/li&gt;
+  &lt;li&gt; &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; is available as Free Software under the terms of the Free Software FoundationÃ¢ÂÂs GNU General Public License in source code form.&lt;/li&gt;
+&lt;/ol&gt;
+
+---
+
+# What is &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;?
+R is an integrated suite of software facilities for **data manipulation, calculation and graphical display.** It includes an effective **data handling** and storage facility, a suite of operators for **calculations on arrays, in particular matrices**, a large, coherent, integrated collection of intermediate tools for **data analysis, graphical facilities for data analysis and display either on-screen or on hardcopy, and a well-developed, simple and effective programming language** which includes conditionals, loops, user-defined recursive functions and input and output facilities.
+
+The term "environment" is intended to characterize it as a fully planned and coherent system, rather than an incremental accretion of very specific and inflexible tools, as is frequently the case with other data analysis software.
+
+---
+
+# What is &lt;code class="remark-inline-code"&gt;R&lt;/code&gt;?
+&lt;code class="remark-inline-code"&gt;R&lt;/code&gt;, like &lt;code class="remark-inline-code"&gt;S&lt;/code&gt;, is designed around a true computer language, and it allows users to add additional functionality by defining new functions. 
+
+Many users think of &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; as a statistics system. We prefer to think of it of an environment within which statistical techniques are implemented. &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; can be extended (easily) via packages. There are about eight packages supplied with the &lt;code class="remark-inline-code"&gt;R&lt;/code&gt; distribution and many more are available through the CRAN family of Internet sites covering a very wide range of modern statistics.
+
+(https://www.r-project.org/about.html)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
