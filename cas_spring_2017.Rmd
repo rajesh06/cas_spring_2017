@@ -231,7 +231,7 @@ highchart(height = 400) %>%
 # Why Should I Use <code class="remark-inline-code">R</code>
 <ol>
   <li> What is An Actuary? We manage risk. It's what we do. With <i>unbeatable analytical skills</i>, we help organizations plan for the future and protect themselves from loss. (http://www.beanactuary.org/what/) </li>
-  <li> So what is the right tool to apply these <i>unbeatable anaytical skills</i>?</li>
+  <li> So what is the right tool to apply these <i>unbeatable analytical skills</i>?</li>
   <ol>
     <li> <div class="rlogo"> <img src="img/Logo_Excel_137x60.png" width="100px"> </div></li>
     <li> Arius, ResQ, ICRFS, ReservePro, Igloo</li>
@@ -291,7 +291,7 @@ highchart(height = 400) %>%
 <ol>
   <li> <code class="remark-inline-code">R</code> provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering, ...) and graphical techniques, and is highly extensible. </li>
   <li> One of <code class="remark-inline-code">R</code>'s strengths is the ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed. Great care has been taken over the defaults for the minor design choices in graphics, but the user retains full control.</li>
-  <li> <code class="remark-inline-code">R</code> is available as Free Software under the terms of the Free Software Foundationâs GNU General Public License in source code form.</li>
+  <li> <code class="remark-inline-code">R</code> is available as Free Software under the terms of the Free Software Foundation's GNU General Public License in source code form.</li>
 </ol>
 
 ---

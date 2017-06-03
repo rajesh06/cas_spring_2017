@@ -47,7 +47,7 @@ h1, h2, h3 {
   text-align: center;
 }
 
-excercise {
+exercise {
   color: #006d9e;
   font-weight:  bold;
 }
@@ -58,7 +58,7 @@ excercise {
 <img src = 'img/cas.png'>
 
 <h1 class="title"> 2017 CAS Spring Meeting </h1>
-<h2 class="title"> <span class="red"> Introduction </span> to <code class="remark-inline-code">R</code>: Modling Data and Saving Results</h2>
+<h2 class="title"> <span class="red"> Introduction </span> to <code class="remark-inline-code">R</code>: Reading Data</h2>
 
 <h3 class="title"> Rajesh Sahasrabuddhe</h3>
 
@@ -116,8 +116,8 @@ layout: true
 # Read Data
 
 <ol>
-  <li> Comma-seprated values (<code class="remark-inline-code">read.csv, readr::read_csv</code>)</li>
-  <li> Comma-seprated values (<code class="remark-inline-code">readxl::read_excel</code>)</li>
+  <li> Comma-separated values (<code class="remark-inline-code">read.csv, readr::read_csv</code>)</li>
+  <li> Comma-separated values (<code class="remark-inline-code">readxl::read_excel</code>)</li>
 </ol>
 
 ---
@@ -129,10 +129,10 @@ Locate the <code class="remark-inline-code">mtcars.csv</code> file that comes wi
 library(readr)
 readr_example("mtcars.csv")
 ```
-<excercise>Read this file using <code class="remark-inline-code">read.csv</code> and assign this to object <code class="remark-inline-code">cas01</code><br>
-<excercise>Read this file using <code class="remark-inline-code">read_csv</code> and assign this to object <code class="remark-inline-code">cas02</code><br>
+<exercise>Read this file using <code class="remark-inline-code">read.csv</code> and assign this to object <code class="remark-inline-code">cas01</code><br>
+<exercise>Read this file using <code class="remark-inline-code">read_csv</code> and assign this to object <code class="remark-inline-code">cas02</code><br>
 What is the difference between the files?
-</excercise>
+</exercise>
 
 ---
 
@@ -155,9 +155,9 @@ Locate the <code class="remark-inline-code">mtcars.csv</code> file that comes wi
 library(readxl)
 readxl_example('deaths.xlsx')
 ```
-<excercise>Read this file using <code class="remark-inline-code">read_excel</code> and assign this to object <code class="remark-inline-code">cas03</code><br>
+<exercise>Read this file using <code class="remark-inline-code">read_excel</code> and assign this to object <code class="remark-inline-code">cas03</code><br>
 How many row and columns does this dataframe contain?
-</excercise>
+</exercise>
 
 ---
 

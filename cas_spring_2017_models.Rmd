@@ -149,7 +149,7 @@ abline(h = new_mpg, lty = 'dotted', col = 'blue')
 
 Fit a linear model regressing distance on speed in the <code>datasets::cars</code> data.
 <ol>
-<li>Provide the coefficient of disatance</li>
+<li>Provide the coefficient of distance</li>
 <li>Plot the model (in orange) against the data (in blue).</li>
 <li>Extract the residual of the 10th data point</li>
 </ol>
@@ -196,7 +196,7 @@ The <code>mixtools</code> packages includes functions to fit finite mixture dist
   <ol>
     <li> Using a starting seed of <code>12345</code></li>
     <li> Using a 50/50 weighting for the starting mix rates </li>
-    <li> With the components certered 55 and 80</li>
+    <li> With the components centered 55 and 80</li>
     <li> With each of the components have a standard deviations of 5</li>
   </ol>
   <li> Report the parameters of the model </li>
